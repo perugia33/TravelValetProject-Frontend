@@ -1,0 +1,3 @@
+{
+  "extends": "react-app"  // Use the recommended rules from eslint-config-react-app,
+}
