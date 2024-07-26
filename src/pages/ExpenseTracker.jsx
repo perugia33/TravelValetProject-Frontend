@@ -4,7 +4,7 @@ import ExpenseForm from "../components/ExpenseForm";
 import ExpenseList from "../components/ExpenseList";
 import ExpensesSummary from "../components/ExpensesSummary";
 import axios from "axios";
-import './ExpsStyles.css'
+import styles from './expenseTracker.module.css';
 
 
 
@@ -47,11 +47,11 @@ function ExpenseTracker() {
       };
     
     return (
-        <div className="ExpenseTracker">
+        <div className={styles.ExpenseTracker}>
             <NavBar />
             <h1>Expense Tracker</h1>
             <ExpenseForm onAddExpense={addExpense}/>
-            <div className="content-container">
+            <div className={styles['content-container']}>
                 <ExpenseList expenses={expenses} onDeleteExpense={handleDeleteExpense}  />
                 <ExpensesSummary expenses={expenses} />
             </div>   
