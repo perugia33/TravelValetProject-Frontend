@@ -10,10 +10,9 @@ import './ExpsStyles.css'
 
 function ExpenseTracker() {
     const [expenses, setExpenses] = useState([]);
-    // const addExpense = (expense) => {
-    //     setExpenses([...expenses, expense]);
+    
     useEffect(() => {
-        // Fetch expenses when component mounts
+        
         const fetchExpenses = async () => {
           try {
             const response = await axios.get('http://localhost:5173/expenses', {

@@ -1,4 +1,4 @@
-import PropTypes from 'prop-types'; // Import prop-types library
+import PropTypes from 'prop-types'; 
 
 import { Pie } from 'react-chartjs-2';
 import { Chart as ChartJS, Title, Tooltip, Legend, ArcElement } from 'chart.js';
@@ -38,7 +38,7 @@ const ExpenseSummary = ({ expenses }) => {
 };
 
 ExpenseSummary.propTypes = {
-  expenses: PropTypes.array.isRequired, // Add prop types validation for 'expenses' prop
+  expenses: PropTypes.array.isRequired, 
 };
 
 export default ExpenseSummary;

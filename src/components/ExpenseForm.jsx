@@ -47,12 +47,7 @@ const ExpenseForm = ({onAddExpense}) => {
 
     </div>
     
-      
-    //   <input type="text" placeholder="Description" value={description} onChange={(e)=> setDescription(e.target.value)} required/>
-    //   <input type="text" placeholder="Category" value={category} onChange={(e)=> setCategory(e.target.value)} required/>
-    //   <input type="number" placeholder="Amount" value={amount} onChange={(e)=> setAmount(e.target.value)} required/>
-    //   <button type="submit">Add Expense</button>
-    // </form>
+    
   );
 };
 
