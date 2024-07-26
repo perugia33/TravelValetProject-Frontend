@@ -9,44 +9,56 @@
 // export default SignUpForm
 // import React from 'react';
 /* eslint-disable react/prop-types */
+
+import styles from './SignUpForm.module.css';
 function SignUpForm({ onToggle }) {
   return (
-    <div>
-      <h2>Create  new account</h2>
-      <form>
+    <div className={styles.signUpContainer}>
+        <div className={styles.formContainer}>
+            <h1>Travel Valet</h1>
+            <h2>Registration Form</h2>
+            <br />
+            <form className={styles.formGroup} >
+                <div>
+                <label htmlFor="username" className={styles.label}>Username</label>
+                <input
+                    type="text"
+                    id="username"
+                    name="username"
+                    required
+                    className={styles.formInput}    
+                />
+                </div>
+                <div>
+                <label htmlFor="email" className={styles.label}>Email Address</label>
+                <input
+                    type="email"
+                    id="email"
+                name="email"
+                required
+                className={styles.formInput}    
+            />
+             </div>
+             
         <div>
-          <label htmlFor="username">Username</label>
-          <input
-            type="text"
-            id="username"
-            name="username"
-            required
-          />
-        </div>
-        <div>
-          <label htmlFor="email">Email Address</label>
-          <input
-            type="email"
-            id="email"
-            name="email"
-            required
-          />
-        </div>
-        <div>
-          <label htmlFor="password">Password</label>
+          <label htmlFor="password" className={styles.label}>Password</label>
           <input
             type="password"
             id="password"
             name="password"
             required
+            className={styles.formInput}    
           />
         </div>
-        {/* <button type="submit">Sign Up</button> */}
-        <p>
-         Already have an account? <button type="button" onClick={onToggle}>Login</button>
-        </p>
-      </form>
-    </div>
+        </form>
+        <button className={styles.formButton} >Submit</button> 
+       <br />
+        <h2>
+         Already have an account? <button type="button" onClick={onToggle} className={styles.toggleButton} >Login</button>
+        </h2>
+    
+      </div>
+    </div>  
   );
 }
 
