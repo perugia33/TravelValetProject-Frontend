@@ -1,9 +1,12 @@
 import { NavLink } from 'react-router-dom';
 import styles from './NavBar.module.css';
+// import {AuthContext} from '../contexts/AuthContext';
+// import { useContext } from 'react';
 // import Logo from './Logo';
 
 
 function NavBar() {
+    // const {auth, logout} = useContext(AuthContext);
     return (
         <nav className={styles.nav}>
             

@@ -1,28 +1,63 @@
-import {useState} from 'react';
+import {useContext, useState} from 'react';
 import PropTypes from 'prop-types';
 import styles from '../pages/expenseTracker.module.css';
-// import axios from 'axios';
+import axios from 'axios';
+import {AuthContext} from '../contexts/AuthContext.jsx';
 
 const ExpenseForm = ({onAddExpense}) => {
+  const {auth} = useContext(AuthContext);
   const [description, setDescription]=useState('');
   const [amount, setAmount]=useState('');
   const [date, setDate]=useState('');
   const [category, setCategory]=useState('');
-
-  const handleSubmit = (e)=> {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    onAddExpense({
-      description,
-      amount: parseFloat(amount),
-      date,
-      category
-    })
-    
-    setDescription('');
-    setAmount('');
-    setDate('');
-    setCategory('');
+    if (amount && description && date && category) {
+      try {
+        const response = await axios.post(
+          'http://127.0.0.1:5000/expenses', 
+          {
+            amount,
+            description,
+            date,
+            category,
+          },
+          {
+            headers: {
+              'Authorization': `Bearer ${auth}`, // Use token for authentication
+              'Content-Type': 'application/json',
+            },
+          }
+        );
+
+        if (response.status === 201) {
+          onAddExpense(response.data);
+          setAmount('');
+          setDescription('');
+          setDate('');
+          setCategory('');
+        } else {
+          console.error('Failed to add expense');
+        }
+      } catch (error) {
+        console.error('Error adding expense:', error);
+      }
+    }
   };
+  // const handleSubmit = (e)=> {
+  //   e.preventDefault();
+  //   onAddExpense({
+  //     description,
+  //     amount: parseFloat(amount),
+  //     date,
+  //     category
+  //   })
+    
+  //   setDescription('');
+  //   setAmount('');
+  //   setDate('');
+  //   setCategory('');
+  // };
   return (
     <div className={styles.ExpenseForm}>
       <h2>Add Expense</h2>
