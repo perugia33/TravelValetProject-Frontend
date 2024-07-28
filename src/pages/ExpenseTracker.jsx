@@ -39,22 +39,12 @@ function ExpenseTracker() {
     if (auth) {
       fetchExpenses()
     }
-  }, [expenses]);
+  }, []);
 
-  const onAddExpense = async(date,description,category,amount)=>{
-    try{
-      const response = await client.post('',{
-        date,
-        description,
-        category,
-        amount
-      });
-      setExpenses((prevExpenses)=>[...prevExpenses,response.data]);
-      await fetchExpenses();
-    } catch (error) {
-      console.error('Error adding expense:', error);
-    }
+  const onAddExpense = (newExpense) => {
+    setExpenses((prevExpenses) => [...prevExpenses, newExpense]);
   };
+
   const onDeleteExpense = async(id) => {
     try {
       await client.delete(`/${id}`);
