@@ -4,60 +4,48 @@ import styles from '../pages/expenseTracker.module.css';
 import axios from 'axios';
 import {AuthContext} from '../contexts/AuthContext.jsx';
 
+
 const ExpenseForm = ({onAddExpense}) => {
   const {auth} = useContext(AuthContext);
   const [description, setDescription]=useState('');
   const [amount, setAmount]=useState('');
   const [date, setDate]=useState('');
   const [category, setCategory]=useState('');
+  
+  const client = axios.create({
+    baseURL: 'http://127.0.0.1:5000/expenses', 
+    headers: {
+      'Authorization': `Bearer ${auth}`,
+    },
+  });
+
   const handleSubmit = async (e) => {
+    console.log('Auth state:', auth)
     e.preventDefault();
     if (amount && description && date && category) {
       try {
-        const response = await axios.post(
-          'http://127.0.0.1:5000/expenses', 
-          {
-            amount,
-            description,
-            date,
-            category,
-          },
-          {
-            headers: {
-              'Authorization': `Bearer ${auth}`, // Use token for authentication
-              'Content-Type': 'application/json',
-            },
-          }
-        );
-
+        const response = await client.post('', {
+          amount,
+          description,
+          date,
+          category,
+        });
         if (response.status === 201) {
           onAddExpense(response.data);
           setAmount('');
           setDescription('');
           setDate('');
           setCategory('');
-        } else {
-          console.error('Failed to add expense');
-        }
+        } 
       } catch (error) {
-        console.error('Error adding expense:', error);
+        console.error('Error adding expense:', error.response ? error.response.data : error.message);
+        if (error.response && error.response.status === 401) {
+          console.error('Token may be expired or invalid.');
+        }
       }
-    }
+    }  
   };
-  // const handleSubmit = (e)=> {
-  //   e.preventDefault();
-  //   onAddExpense({
-  //     description,
-  //     amount: parseFloat(amount),
-  //     date,
-  //     category
-  //   })
-    
-  //   setDescription('');
-  //   setAmount('');
-  //   setDate('');
-  //   setCategory('');
-  // };
+ 
   return (
     <div className={styles.ExpenseForm}>
       <h2>Add Expense</h2>

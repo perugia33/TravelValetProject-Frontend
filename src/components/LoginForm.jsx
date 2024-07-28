@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
-import {useState, } from 'react';
+import {  useState, } from 'react';
 import axios from 'axios';
-import {useAuth} from '../contexts/AuthContext.jsx';
+import { useAuth} from '../contexts/AuthContext.jsx'; 
 import styles from './LoginForm.module.css' 
 
 function LoginForm({onToggle}) {
@@ -9,26 +9,25 @@ function LoginForm({onToggle}) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const {login} = useAuth();
-  const [error, setError] = useState('');
-  // const [success, setSuccess] = useState('');
+  const [error, setError] = useState(''); 
 
   const handleSubmit =  async (e) => {
     e.preventDefault();
     try {
-      // await login(username, password)
       const response = await axios.post('http://127.0.0.1:5000/user/login',{username, password});
-      login(response.data.access_token);
-      // const {access_token} = response.data
-      // localStorage.setItem('jwt', access_token);
-      // setSuccess('User logged in successfully!');
-      // setError('')
-      // setUsername('');
-      // setPassword('');
-      window.location.href = 'http://localhost:5173';
+      const {access_token} = response.data
+      if (access_token) {
+        login(access_token);
+        // window.location.href = 'http://localhost:5173'; /**** */
+      }else {
+        throw new Error("No access token received")
+      }
+      
+      
     } catch (err) {
-      console.error('Error logging in: ', err);
-      setError('Invalid username or password');
-      // setSuccess('');
+      console.error('Error logging in: ', err.response ? err.response.data : err.message);
+      setError('Invalid username or password'); 
+      
     }
   };
 

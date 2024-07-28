@@ -1,5 +1,5 @@
 import { createContext, useState, useContext } from 'react';
-import PropTypes from 'prop-types'; // Add this line to import PropTypes
+import PropTypes from 'prop-types'; 
 
 // Create the context
 const AuthContext = createContext();
@@ -7,19 +7,17 @@ const AuthContext = createContext();
 // Create a provider component
 export function AuthProvider ({ children }) {
   const [auth, setAuth] = useState(()=>localStorage.getItem('jwt')|| null);
-  // const [user, setUser] = useState(()=>localStorage.getItem('user')|| null);
-  // Add prop validation for 'children'
-  // 
-  // const [auth, setAuth] = useState(null);
-
+ 
   const login = (token) => {
     setAuth(token);
     localStorage.setItem('jwt', token);
+    window.location.href = 'http://localhost:5173/expenses'; 
   };
 
   const logout = () => {
     setAuth(null);
     localStorage.removeItem('jwt');
+    localStorage.removeItem('username');
     // window.location.href = 'http://localhost:5173';
     
   };

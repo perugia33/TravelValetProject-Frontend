@@ -15,50 +15,52 @@ function ExpenseTracker() {
   const [expenses, setExpenses] = useState([]);
   const [editingExpense, setEditingExpense] = useState(null);
   const [updateExpenseData, setUpdateExpenseData] = useState({});
-  const [loading, setLoading] = useState(true);
+  // const [loading, setLoading] = useState(true);
   const navigate=useNavigate();
   
+  const client = axios.create({
+    baseURL: 'http://127.0.0.1:5000/expenses', 
+    headers: {
+      'Authorization': `Bearer ${auth}`,
+    },
+  });
+
+  const fetchExpenses = async() => {
+    try{
+      const response = await client.get();
+      setExpenses(response.data);
+    }
+    catch(error){
+      console.error('Error fetching expenses', error);
+    }
+  };
   
   useEffect(() => {
-    // if (!auth) {
-    //   console.log('No auth token found');
-    //   return;
-    // } 
-    const fetchExpenses = async () => {
-      try {
-        const response = await axios.get('http://127.0.0.1:5000/expenses', {
-          headers: {
-            'Authorization': `Bearer ${auth}`,
-            'Content-Type': 'application/json',
-          },
-        });
-        setExpenses(response.data);
-      } catch (err) {
-        console.error('Error fetching expenses:', err);
-      } finally {
-        setLoading(false);
-      }
-    };
-    if (auth){
-      fetchExpenses();
+    if (auth) {
+      fetchExpenses()
     }
-  },[auth]);
-  
-  const addExpense = (newExpense) => {
-    setExpenses([...expenses, newExpense]);
-  };
+  }, [expenses]);
 
-  const onDeleteExpense = async (id) => {
-    try {
-      await axios.delete(`http://127.0.0.1:5000/expenses/${id}`, {
-        headers: {
-          'Authorization': `Bearer ${auth}`,
-          'Content-Type': 'application',
-        }
+  const onAddExpense = async(date,description,category,amount)=>{
+    try{
+      const response = await client.post('',{
+        date,
+        description,
+        category,
+        amount
       });
+      setExpenses((prevExpenses)=>[...prevExpenses,response.data]);
+      await fetchExpenses();
+    } catch (error) {
+      console.error('Error adding expense:', error);
+    }
+  };
+  const onDeleteExpense = async(id) => {
+    try {
+      await client.delete(`/${id}`);
       setExpenses(expenses.filter(expense => expense.id !== id));
-    } catch (err) {
-      console.error('Error deleting expense:', err);
+    } catch (error) {
+      console.error('Error deleting expense:', error);
     }
   };
   const onEditExpense = (expense) => {
@@ -70,26 +72,15 @@ function ExpenseTracker() {
       amount: expense.amount,
     });
   };
-  const handleUpdateExpense = async (id) => {
+  const onUpdateExpense = async (id) => {
     try {
-      await axios.put(`http://127.0.0.1:5000/expenses/${id}`, updateExpenseData, {
-        headers: {
-          'Authorization': `Bearer ${auth}`,
-          'Content-Type': 'application',
-        }
-      });
-      const response = await axios. get('http://127.0.0.1:5000/expenses', {
-        headers: {
-          'Content-Type': 'application',
-          'Authorization': `Bearer ${auth}`,
-        },
-      });
-      setExpenses(response.data);
+      await client.put(`/${id}`, updateExpenseData);
+      setExpenses((prevExpenses)=>
+        prevExpenses.map(expense => expense.id === id ? {...expense, ...updateExpenseData} : expense)
+      );
       setEditingExpense(null);
-      // setExpenses(expenses.map(expense => (expense.id === id ? { ...expense, ...updateExpenseData } : expense)));
-      // setEditingExpense(null);
-    } catch (err) {
-      console.error('Error updating expense:', err);
+    } catch (error) {
+      console.error('Error updating expense:', error);
     }
   };
   const handleChange = (e) => {
@@ -101,12 +92,7 @@ function ExpenseTracker() {
   const handleLogout = () => {
     logout();
     navigate('/login');
-    
   };
-  if (loading) {
-    return <div>Loading...</div>;
-  }
-
   if (!auth) {
     return <div>Please log in to view and manage expenses.</div>;
   }
@@ -114,8 +100,18 @@ function ExpenseTracker() {
     <div className={styles.ExpenseTracker}>
       <NavBar />
       <h1>Expense Tracker</h1>
-      <button onClick={handleLogout}>Logout</button>
-      <ExpenseForm onAddExpense={addExpense}/>
+      <div>
+        {auth ? (
+          <div>
+            <p>Welcome!</p>
+            <button onClick={handleLogout}>Logout</button>
+          </div>
+        ) : (
+          <p>Please log in.</p>
+        )}
+      </div>
+      
+      <ExpenseForm onAddExpense={onAddExpense}/>
       <div className={styles['content-container']}>
           <ExpenseList expenses={expenses} onDeleteExpense={onDeleteExpense} onEditExpense={onEditExpense}  />
           <ExpensesSummary expenses={expenses} />
@@ -123,7 +119,7 @@ function ExpenseTracker() {
       {editingExpense && (
         <div className={styles.ExpenseForm} >
           <h3>Edit Expense</h3>
-          <form onSubmit={() => handleUpdateExpense(editingExpense.id)} className={styles["form-inline"]}>
+          <form onSubmit={() => onUpdateExpense(editingExpense.id)} className={styles["form-inline"]}>
             <div className={styles["form-group"]}>
               <label htmlFor="date">Date</label>
               <input
