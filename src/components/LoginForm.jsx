@@ -16,8 +16,9 @@ function LoginForm({onToggle}) {
     try {
       const response = await axios.post('http://127.0.0.1:5000/user/login',{username, password});
       const {access_token} = response.data
+      const{user}=response.data
       if (access_token) {
-        login(access_token);
+        login(access_token, user);
         // window.location.href = 'http://localhost:5173'; /**** */
       }else {
         throw new Error("No access token received")

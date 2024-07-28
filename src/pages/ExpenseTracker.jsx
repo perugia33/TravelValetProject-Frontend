@@ -11,11 +11,11 @@ import styles from './expenseTracker.module.css';
 
 
 function ExpenseTracker() {
-  const {auth, logout} = useContext(AuthContext);
+  const {auth, user, logout} = useContext(AuthContext);
   const [expenses, setExpenses] = useState([]);
   const [editingExpense, setEditingExpense] = useState(null);
   const [updateExpenseData, setUpdateExpenseData] = useState({});
-  // const [loading, setLoading] = useState(true);
+  // const [user, setUsername] = useState('');
   const navigate=useNavigate();
   
   const client = axios.create({
@@ -24,6 +24,12 @@ function ExpenseTracker() {
       'Authorization': `Bearer ${auth}`,
     },
   });
+  // const fetchUsername = async() => {
+    
+  //   const response = await axios.get('http://127.0.0.1:5000/login',{username, password});
+  //   setUsername(response.data.user);
+  // }
+
 
   const fetchExpenses = async() => {
     try{
@@ -85,7 +91,11 @@ function ExpenseTracker() {
     navigate('/login');
   };
   if (!auth) {
-    return <div>Please log in to view and manage expenses.</div>;
+    return <div><h2>Please login to view and manage expenses.</h2>
+      <br />
+      <button onClick={() => navigate('/login')}>Login</button>
+      
+    </div>;
   }
   return (
     <div className={styles.ExpenseTracker}>
@@ -93,8 +103,8 @@ function ExpenseTracker() {
       <h1>Expense Tracker</h1>
       <div>
         {auth ? (
-          <div>
-            <p>Welcome!</p>
+          <div className={styles["top-right"]}>
+            <p>Hello {user}! </p>
             <button onClick={handleLogout}>Logout</button>
           </div>
         ) : (
