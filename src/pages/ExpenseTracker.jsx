@@ -54,9 +54,10 @@ function ExpenseTracker() {
     }
   };
   const onEditExpense = (expense) => {
+    const formattedDate = new Date(expense.date).toISOString().split('T')[0]; 
     setEditingExpense(expense);
     setUpdateExpenseData({
-      date: expense.date,
+      date: formattedDate,
       description: expense.description,
       category: expense.category,
       amount: expense.amount,
@@ -130,12 +131,20 @@ function ExpenseTracker() {
             </div>
             <div className={styles["form-group"]}>
               <label htmlFor="category">Category</label>
-              <input
-                type="text"
+              <select
                 name="category"
                 value={updateExpenseData.category}
                 onChange={handleChange}
-              />
+                required
+              >
+                <option value="" disabled>Select a category</option> {/* Placeholder option */}
+                <option value="Food">Food</option>
+                <option value="Transportation">Transportation</option>
+                <option value="Lodging">Lodging</option>
+                <option value="Souvenirs">Souvenirs</option>
+                <option value="Entertainment">Entertainment</option>
+                <option value="Other">Other</option>
+              </select>
             </div>
             <div className={styles["form-group"]}>
               <label htmlFor="amount">Amount</label>

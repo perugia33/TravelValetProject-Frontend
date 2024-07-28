@@ -59,8 +59,16 @@ const ExpenseForm = ({onAddExpense}) => {
           <input type="text" id='description' value={description} onChange={(e)=> setDescription(e.target.value)} required/>
         </div>
         <div className={styles["form-group"]}>
-          <label htmlFor="category">Category</label>
-          <input type="text" id='category' value={category} onChange={(e)=> setCategory(e.target.value)} required/>
+        <label htmlFor="description">Category</label>
+          <select id='category' value={category} onChange={(e)=>setCategory(e.target.value)}required>
+            <option value=''disabled>Select Category</option>
+            <option value='Food'>Food</option>
+            <option value='Transportation'>Transportation</option>
+            <option value='Lodging'>Lodging</option>
+            <option value='Souvenirs'>Souvenirs</option>
+            <option value='Entertainment'>Entertainment</option>
+            <option value='Other'>Other</option>
+          </select>
         </div>
         <div className={styles["form-group"]}>
           <label htmlFor="amount">Amount</label>
