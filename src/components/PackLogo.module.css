@@ -1,0 +1,14 @@
+.logo {
+    text-align: center;
+    background-image: url("packLogo3.png");
+    background-size: cover;
+    background-position: center;
+    font-family: "Monoton";
+    font-size: 2rem;
+    color: rgb(40, 3, 67);
+    text-transform: uppercase;
+    font-weight: 400;
+    word-spacing: 30px;
+    letter-spacing: -5px;
+    padding: 4rem 2rem ;
+  }

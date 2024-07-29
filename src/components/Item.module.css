@@ -1,0 +1,17 @@
+ .dBtn{
+    margin-left: 10px;  
+} 
+.item {  
+    display: flex;
+    /* margin:10px ; */
+    align-items: center;
+    padding: .3rem;
+    /* border-bottom: 1px solid #ddd; */
+}
+
+
+    .checkboxLabel{ 
+        margin-right: 3rem;
+
+
+}

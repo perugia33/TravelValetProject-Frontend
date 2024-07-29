@@ -1,0 +1,36 @@
+
+.list {
+  background-color: #6e6e6f;
+  color: whitesmoke;
+  padding: 4rem 0;
+  display: flex;
+  font-size: 2rem;
+  justify-content: space-between;
+  flex-direction: column;
+  gap: 2.2rem;
+  align-items: center;
+  height: 40vh;
+
+}
+
+.list ul {
+  list-style: none;
+  width: 90%;
+  overflow-y: auto;
+  display: flex;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  gap: .9rem;
+  justify-content: center;
+  align-content: start;
+}
+
+    .list li {
+        display: flex;
+        align-items: center;
+        gap: 1.2rem;
+      }
+ 
+
+
+
