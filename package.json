@@ -10,12 +10,9 @@
     "preview": "vite preview"
   },
   "dependencies": {
-<<<<<<< HEAD
     "eslint-config-react-app": "^7.0.1",
     "eslint-plugin-cypress": "^3.4.0",
-=======
     "chart.js": "^4.4.3",
->>>>>>> 048b46164d4668af9c809bf686b2ecf9dbdf0b63
     "react": "^18.2.0",
     "react-chartjs-2": "^5.2.0",
     "react-dom": "^18.2.0",
