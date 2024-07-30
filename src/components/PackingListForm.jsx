@@ -47,7 +47,6 @@ function PackingListForm({onAddItems}) {
                    
                 }
 
-              
                 placeholder="Item..."
                  />
              <button className={styles.select}>Add</button>

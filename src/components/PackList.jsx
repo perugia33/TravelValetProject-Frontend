@@ -25,3 +25,4 @@ function PackList({items, onDeleteItem, onToggleItem}) {
 }
 
 export default PackList
+

@@ -4,12 +4,7 @@ function Item({ item, onDeleteItem, onToggleItem }) {
         <li className={styles.item}>
          <label className={styles.checkboxLabel} >
             packed
-           
-            {/* <input
-            type="checkbox"
-            checked={item.packed}
-            onChange={() => console.log("clicked")}
-            /> */}
+    
            <input
             type="checkbox"
              value={item.packed}

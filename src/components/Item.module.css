@@ -3,15 +3,19 @@
 } 
 .item {  
     display: flex;
-    /* margin:10px ; */
+ 
     align-items: center;
     padding: .3rem;
+    width: 80%;
     /* border-bottom: 1px solid #ddd; */
 }
 
 
     .checkboxLabel{ 
-        margin-right: 3rem;
+        margin-right: 2rem;
+        align-items: center;
+        display: flex;
+        gap: 1rem;
 
 
 }
