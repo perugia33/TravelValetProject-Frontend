@@ -147,7 +147,7 @@ function ExpenseTracker() {
                 onChange={handleChange}
                 required
               >
-                <option value="" disabled>Select a category</option> {/* Placeholder option */}
+                <option value="" disabled>Select a category</option> 
                 <option value="Food">Food</option>
                 <option value="Transportation">Transportation</option>
                 <option value="Lodging">Lodging</option>
