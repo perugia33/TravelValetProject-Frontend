@@ -18,7 +18,7 @@ function Item({ item, onDeleteItem, onToggleItem }) {
           
         </span>
         
-        <button className={styles.dBtn}   onClick={() => onDeleteItem(item.id)}>❌</button>
+        <button className={styles.dBtn}   onClick={() => onDeleteItem(item.id)}> ❌ </button>
       </li>
       
     )

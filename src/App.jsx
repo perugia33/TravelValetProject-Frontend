@@ -2,10 +2,12 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import './App.css'
 import Homepage from './pages/Homepage'
 import PackingList from './pages/PackingList'
-import Dining from './pages/Dining'
+import DestinationGuide from './pages/DestinationGuide'
 import Login from './pages/Login' 
+import SavedLists from './components/SavedLists'  
 import ExpenseTracker from './pages/ExpenseTracker'
 import NotFound from './pages/NotFound'
+
 
 function App() {
  
@@ -14,8 +16,9 @@ function App() {
         <Routes>   
             <Route path="/" element={<Homepage />} />
             <Route path="packinglist" element={<PackingList />} />
-            <Route path="dining" element={<Dining />} />  
+            <Route path="dining" element={<DestinationGuide />} />  
             <Route path="login" element={<Login />} />
+            <Route path="savedLists" element={<SavedLists />} />  
             <Route path="expenses" element={<ExpenseTracker />} />
             <Route path="*" element={<NotFound />} />
         </Routes> 

@@ -1,10 +1,17 @@
-import styles from  "./Logo.module.css";
+import styles from  "../components/Logo.module.css"   ;
 
 function Logo() {
     return (
-        <h4  className={styles.logo}>
-            Travel Valet
-        </h4>
+        <div className={styles.logo}>
+            <h1  >
+                Travel Valet
+            </h1>
+            <h2>
+                Destination Guide       
+            </h2>   
+
+        </div>
+
     )
 }
 

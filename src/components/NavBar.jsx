@@ -16,7 +16,7 @@ function NavBar() {
                     <NavLink to="/packinglist">Packing List</NavLink> 
                 </li>
                 <li>
-                    <NavLink to="/dining">Dining</NavLink>
+                    <NavLink to="/dining">Destination Guide</NavLink>
                 </li>
                 <li>
                     <NavLink to="/login">Login</NavLink>
