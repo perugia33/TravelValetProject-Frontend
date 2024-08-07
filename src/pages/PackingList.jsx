@@ -4,16 +4,24 @@ import ProgressTracker from "../components/ProgressTracker";
 import PackingListForm from "../components/PackingListForm";
 import PackLogo from "../components/PackLogo";
 import styles from "./PackingList.module.css";
-import { useState } from "react";
-
+import { useState, useRef }  from "react";
+import axios from "axios";
 
 
 function PackingList() {
+  
     const [items, setItems] = useState([]); 
+    const [listId] = useState(Date.now()); // Generate listId only once
+    const listNameRef = useRef('');
+
 
     function handleAddItems(Item) {  
         setItems((Items) => [ ...Items, Item]);
     }
+
+    const handleClearAllItems = () => {
+      setItems([]);
+    };
 
     function handleDeleteItem(id) {
         setItems((Items) => Items.filter((Item) => Item.id !== id));
@@ -31,6 +39,22 @@ function PackingList() {
     }
 
 
+    async function handleSave() {
+        const listName = prompt("Enter a name for your packing list (e.g., 'June 2024 London UK')");
+        if (listName) {
+          listNameRef.current = listName; 
+          try {
+            const response = await axios.post("http://localhost:3001/packinglist", { items, listName, listId  });
+            console.log("Response from save list", response.data);
+          } catch (error) {
+            console.log("Error saving list", error);
+          }
+        }
+      }
+        
+    //    // save the items to backend  
+     
+
     return (
         <div  className={styles.packingpage}>
               <NavBar />    
@@ -38,16 +62,20 @@ function PackingList() {
            
             <PackLogo/>
 
-              <PackingListForm  onAddItems={handleAddItems}/>   
+              <PackingListForm  onAddItems={handleAddItems} listId={listId} />   
            
             <PackList items={items}
                  onDeleteItem={handleDeleteItem}
                  onToggleItem={handleToggleItem}    
             />
 
-            <ProgressTracker/>
+            <ProgressTracker 
+                items={items}
+                onSavedList={handleSave}  listId={listId}  onClearAllItems={handleClearAllItems} listNameRef={listNameRef}/>
         </div>
-    )
-}
+        )
+    }
+    
+
 
 export default PackingList

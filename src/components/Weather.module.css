@@ -1,0 +1,45 @@
+.container {
+    padding: 20px;
+    border: 1px dashed #ccc; /* Border to distinguish sections */
+    border-radius: 8px;
+    margin: 2rem;
+  
+    outline: 2px solid #222;
+    outline-offset: 1.2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+    gap: 4rem;
+    padding: 6rem 0;
+ 
+}
+
+.weatherData {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+
+.weatherContainer {
+    display: flex;
+    gap: 20px; /* Space between each day's weather data */
+    padding: 20px;
+}
+
+.day {
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.temp {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.minTemp, .maxTemp {
+    margin: 2px 0;
+}
