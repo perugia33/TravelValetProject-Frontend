@@ -6,7 +6,7 @@ function Logo() {
             <h1  >
                 Travel Valet
             </h1>
-            <h2>
+            <h2 className={styles.cursive}>
                 Destination Guide       
             </h2>   
 

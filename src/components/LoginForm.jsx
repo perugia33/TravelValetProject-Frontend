@@ -1,4 +1,5 @@
 /* eslint-disable react/prop-types */
+
 import {  useState, } from 'react';
 import axios from 'axios';
 import { useAuth} from '../contexts/AuthContext.jsx'; 
@@ -38,24 +39,22 @@ function LoginForm({onToggle}) {
           <h1>Travel Valet</h1>
           <h2>Login to Begin</h2>
           <br />
-          <form className={styles.formGroup} onSubmit={handleSubmit}>
-          <div>
-              <label className={styles.label}>Username:</label>
-              <input type="text" name="username" required onChange={(e) => setUsername(e.target.value)} className={styles.formInput }/>
+          <form className={styles.formGroup} onSubmit={handleSubmit}>           <div>
+               <label className={styles.label}>Username:</label>
+               <input type="text" name="username" required onChange={(e) => setUsername(e.target.value)} className={styles.formInput }/>
               </div>
-          <div>
-              <label className={styles.label}>Password:</label>
-              <input type="password" name="password" required onChange={(e) => setPassword(e.target.value)} className={styles.formInput } />
+           <div>
+               <label className={styles.label}>Password:</label>               <input type="password" name="password" required onChange={(e) => setPassword(e.target.value)} className={styles.formInput } />
           </div>
-          {error && <p className={styles.error}>{error}</p>}
-          <button type="submit" className={styles.formButton}>Login</button>
-          </form>
-          <br />
+           {error && <p className={styles.error}>{error}</p>}
+           <button type="submit" className={styles.formButton}>Login</button>
+           </form>
+           <br />
           <h2>
-          Need to setup an account? <button onClick={onToggle} className={styles.toggleButton} >Click Here</button>
+           Need to setup an account? <button onClick={onToggle} className={styles.toggleButton} >Click Here</button>
           </h2>
-      </div>
-    </div>
+       </div>
+     </div>
   );
 }
 

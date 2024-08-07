@@ -1,14 +1,34 @@
 import styles from './ProgressTracker.module.css';
+import { useNavigate } from 'react-router-dom';
 
 
-function ProgressTracker() {
+
+function ProgressTracker( { items, onSavedList, listId , listNameRef,  onClearAllItems}) {
+    const navigate = useNavigate();
+
+
     return (
         <footer className={styles.footer}>
-           <h2> You have x items on your list and x items packed (x%)</h2>
+    
+             <button onClick={()=> {
+                onClearAllItems();
+                 }}>
+                Clear All Items
+                </button>
 
-             <button>Clear All Items</button>
-           <button>Save List</button>
-           <button>View Saved Lists</button>
+            <button onClick={() => {
+                onSavedList();
+                navigate('/savedLists');
+                console.log("List ID:", listId); 
+                console.log("Items saved", items);
+                console.log("List Name:", listNameRef);
+                 }}>
+                    Save List
+                 </button>
+
+           <button onClick={() => navigate('/savedLists', { state: { listId } })}>
+            View Saved Lists
+            </button>
 
 
         </footer>

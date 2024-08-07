@@ -2,17 +2,17 @@ import styles from './PackingListForm.module.css'
 import { useState } from 'react';
 
 // eslint-disable-next-line react/prop-types
-function PackingListForm({onAddItems}) {
+function PackingListForm({onAddItems}, listId ) {
 
     const[description, setDescription] = useState("");
-    const[quantity, setQuantity] = useState(2); 
+    const[quantity, setQuantity] = useState(1); 
 
 
     function handleSubmit(event) {
         event.preventDefault();
         if (!description) return;
-        // create a new item
-        const newItem = { description, quantity, packed: false, id: Date.now() };
+        // create a new item. id field is  the item's creation date
+        const newItem = { description, quantity, packed: false, id: Date.now(), listId  };
         console.log(newItem);
     
         // onAddItems(newItem);
@@ -49,6 +49,11 @@ function PackingListForm({onAddItems}) {
 
                 placeholder="Item..."
                  />
+                <input
+                type="hidden"
+                value={listId}
+            />
+
              <button className={styles.select}>Add</button>
             
         </form>
