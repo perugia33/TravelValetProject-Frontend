@@ -5,6 +5,7 @@ import PackingList from './pages/PackingList'
 import DestinationGuide from './pages/DestinationGuide'
 import Login from './pages/Login' 
 import SavedLists from './components/SavedLists'  
+import SavedListDetails from './components/SavedListDetails'  
 import ExpenseTracker from './pages/ExpenseTracker'
 import NotFound from './pages/NotFound'
 
@@ -19,6 +20,7 @@ function App() {
             <Route path="dining" element={<DestinationGuide />} />  
             <Route path="login" element={<Login />} />
             <Route path="savedLists" element={<SavedLists />} />  
+            <Route path="savedListDetails/:id" element={<SavedListDetails />} />  
             <Route path="expenses" element={<ExpenseTracker />} />
             <Route path="*" element={<NotFound />} />
         </Routes> 

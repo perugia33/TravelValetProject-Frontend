@@ -1,0 +1,35 @@
+.logo {
+    text-align: center;
+    background-image: url("destination.png");
+    background-size: cover;
+    background-position: center;
+    font-family: "Playwrite US Modern", cursive;
+    font-size: 1.5rem;
+    color: rgb(40, 3, 67);
+    text-transform: uppercase;
+    font-weight: 400;
+    word-spacing: 30px;
+    letter-spacing: -5px;
+    padding: 4rem 2rem ;
+  }
+
+  .savedListLogo {
+    text-align: center;
+    background-image: url("listImage.png");
+    background-size: cover;
+    background-position: center;
+    font-family: "Playwrite US Modern", cursive;
+    font-size: 2rem;
+    color: rgb(40, 3, 67);
+ 
+    font-weight: 400;
+    word-spacing: 10px;
+    letter-spacing: -5px;
+    padding: 3rem 2rem ;
+   
+  }
+
+  .cursive{
+    font-family: "Playwrite US Modern", cursive;
+    font-size: 1.5  rem;
+  }
