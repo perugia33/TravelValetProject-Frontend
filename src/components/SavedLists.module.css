@@ -1,0 +1,48 @@
+.customTable {
+    width: 100%;
+    padding:  .5rem;
+    border-collapse: collapse;
+    border-width: 2px;
+    border-color: #7EA8F8;
+    border-style: solid;
+    color: #000000;
+  }
+  
+  /* .customTable td, table.customTable th {
+    border-width: 2px;
+    border-color: #7EA8F8;
+    border-style: solid;
+    padding: 5px;
+  } */
+  
+  /* .customHead {
+    background-color: #7EA8F8;
+  } */
+  thead {
+    font-size: 1.5rem;
+    color: darkslategrey;
+    background-color: lightblue;
+
+  }
+
+  td {
+    font-size: 1.5rem;
+    color: darkslategrey;
+  
+  }
+  .button {
+    margin-right: 0.5rem;
+    padding: 0.7rem 0.6rem;
+    font-size: 1.6rem;
+    font-weight: 800;
+    border: none;
+    cursor: pointer;
+    background-color: whitesmoke;
+    color:indigo;
+    border-radius: 4px;
+  }
+
+  .cursive{
+    font-family: "Playwrite US Modern", cursive;
+    font-size: 1.5  rem;
+  }
