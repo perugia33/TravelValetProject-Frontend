@@ -11,3 +11,20 @@
     padding: 6rem 0;
     gap: 4rem;
 }
+
+.restaurant {
+    display: flex;
+    align-items: center;
+    gap: 30px; /* Space between image and text */
+    margin-bottom: 20px; 
+}
+
+.restaurant img {
+    max-width: 150px; 
+    height: auto;
+}
+
+.restaurant-details {
+    display: flex;
+    flex-direction: column;
+}
