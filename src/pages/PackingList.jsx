@@ -13,7 +13,7 @@ function PackingList() {
     const [items, setItems] = useState([]); 
     const [listId] = useState(Date.now()); // Generate listId only once
     const listNameRef = useRef('');
-
+  
 
     function handleAddItems(Item) {  
         setItems((Items) => [ ...Items, Item]);
@@ -41,10 +41,20 @@ function PackingList() {
 
     async function handleSave() {
         const listName = prompt("Enter a name for your packing list (e.g., 'June 2024 London UK')");
+      
         if (listName) {
           listNameRef.current = listName; 
+          const dateSaved = new Date().toISOString(); // Generate timestamp for the current date and time
           try {
-            const response = await axios.post("http://localhost:3001/packinglist", { items, listName, listId  });
+            const token = localStorage.getItem('token'); 
+            const response = await axios.post("http://localhost:5000/packing-list", 
+              { list_name: listName, 
+                items ,
+                listId,
+                dateSaved
+              }, 
+              { headers: { Authorization: `Bearer ${token}` } }
+            );
             console.log("Response from save list", response.data);
           } catch (error) {
             console.log("Error saving list", error);

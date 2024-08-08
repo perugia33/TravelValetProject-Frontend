@@ -9,8 +9,9 @@
 
   function SavedListDetails() {
       const location = useLocation();
-      const { list } = location.state || {}; // Access the list from state
+      const { listId, list } = location.state || {}; // Access the list from state
       const [items, setItems] = useState(list?.items || []);
+
       if (!list) return <div>No list found</div>;
 
     // Remove item handler
@@ -45,7 +46,15 @@
                 onDeleteItem={handleRemoveItem}
                 onToggleItem={handleToggleItem}
             />
-            <ProgressTracker/>
+            <ProgressTracker
+                items={items}
+                listId={listId}
+                listNameRef={list.name}
+                onClearAllItems={() => setItems([])}
+                onSavedList={() => console.log('Save list')}
+            
+            
+            />
         </div>
   );
 
