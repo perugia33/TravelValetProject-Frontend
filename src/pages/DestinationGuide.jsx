@@ -27,8 +27,9 @@ function DestinationGuide() {
         setLoading(true);
         setError(null);
         try {
+
             // Request restaurant recommendations
-            const restaurantResponse = await axios.get('/recommendations', {
+            const restaurantResponse = await client.get('/recommendations', {
                 params: {
                     city: formData.city,
                     state: formData.state,
@@ -47,7 +48,8 @@ function DestinationGuide() {
                     city: formData.city,
                     state: formData.state,
                     country: formData.country
-                }
+                },
+                
             });
             // setWeatherData(weatherResponse.data.weather);
             const groupedData = weatherResponse.data.list.reduce((acc, item) => {
