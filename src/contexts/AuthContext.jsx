@@ -13,7 +13,7 @@ export function AuthProvider ({ children }) {
     setAuth(token);
     localStorage.setItem('jwt', token);
     localStorage.setItem('user', user)
-    window.location.href = 'http://localhost:5173/expenses'; 
+    window.location.href = 'http://localhost:5173'; 
   };
 
   const logout = () => {
