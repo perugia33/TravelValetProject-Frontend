@@ -25,13 +25,9 @@
   align-content: start;
 }
 
-    .list li {
-        display: flex;
-        align-items: center;
-        gap: 1.2rem;
-        width: 100%;
-      }
- 
-
-
-
+.list li {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  width: 100%;
+}
