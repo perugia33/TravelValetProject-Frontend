@@ -2,10 +2,11 @@
     flex: 2;
     padding: 20px; /* Adjust padding as needed */
     display: flex;
-    background-color: lightgray;
+    /* background-color: lightgray; */
     flex-direction: column;
     align-items: center;
     color: indigo;
     flex-direction: column;
     gap: 10rem   ;
+    height: max-content;
 }

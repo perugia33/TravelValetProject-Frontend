@@ -8,12 +8,12 @@ function Restaurants({ recommendations }) {
                 <p>No recommendations available.</p>
             ) : (
                 recommendations.map((rec) => (  
-                <div  key={rec.id} className="restaurant">
-                {/*Commented code is to help with styling <div key={rec.id} className={styles.restaurant}>  */}
-                    <img src={rec.image_url} alt={rec.name}/>
-                    {/* <img src={rec.image_url} alt={rec.name} className={styles.image} /> */}
-                    <div className= "restaurant-details">
-                    {/* <div className={styles.restaurantDetails}> */}
+                <div  key={rec.id} className={styles.restaurant}>
+                
+                    <img src={rec.image_url} alt={rec.name}  className={styles.restaurantImage}/>
+                    
+                    <div className={styles.restaurantDetails}>
+                    
                         <h3>{rec.name}</h3>
                         <p>{rec.address}</p>
                         <p>Rating: {rec.rating} ({rec.review_count} reviews)</p>
