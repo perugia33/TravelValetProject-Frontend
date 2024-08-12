@@ -78,7 +78,7 @@ function DestinationGuide() {
                 condition: groupedData[date].icon
             }));
     
-            setWeatherData(formattedData);
+            setWeatherData(formattedData);  
             console.log(weatherResponse.data)
             
 
@@ -98,15 +98,17 @@ function DestinationGuide() {
         {/* <h1>Travel Valet</h1>
         <h2>Destination Guide</h2> */}
          <Logo/>
-            <div className={styles.container}>
-                <Sidebar onSubmit={handleSubmit} />
-                {loading && <p>Loading...</p>}
-                {error && <p>{error}</p>}
-                <Restaurant_Weather
-                    recommendations={recommendations}
-                    weatherData={weatherData}
-                />
-            </div>
+            <div className={styles.background}>
+                <div className={styles.container}>
+                    <Sidebar onSubmit={handleSubmit} />
+                    {loading && <p>Loading...</p>}
+                   {error && <p>{error}</p>}
+                    <Restaurant_Weather
+                        recommendations={recommendations}
+                        weatherData={weatherData}
+                    />
+                </div>
+          </div>
         </div>
    
     )
