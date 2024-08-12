@@ -1,4 +1,5 @@
 import NavBar from "../components/NavBar";
+import ExpenseLogo from "../components/ExpenseLogo"
 import {useState, useEffect, useContext} from "react";
 import ExpenseForm from "../components/ExpenseForm";
 import ExpenseList from "../components/ExpenseList";
@@ -100,7 +101,7 @@ function ExpenseTracker() {
   return (
     <div className={styles.ExpenseTracker}>
       <NavBar />
-      <h1>Expense Tracker</h1>
+      <ExpenseLogo/>
       <div>
         {auth ? (
           <div className={styles["top-right"]}>

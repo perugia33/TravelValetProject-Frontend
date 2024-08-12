@@ -21,7 +21,7 @@ function Homepage() {
                 and discover great restaurants in your destination city.
                 </h2>
                 <br />
-                <Link to ="/login" className="linkStyle">Start Planing</Link>
+                <Link to ="/login" className="linkStyle">Start Planning</Link>
       </section>          
      </main>
     )
