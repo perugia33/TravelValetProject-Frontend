@@ -5,8 +5,9 @@ import Weather from './Weather'
 function Restaurant_Weather({ recommendations, weatherData }) {
     return (
         <div className={styles.mainContent}>
+             <Weather weatherData={weatherData} />
             <Restaurants recommendations={recommendations} />
-            <Weather weatherData={weatherData} />
+           
             
         </div>
     )
