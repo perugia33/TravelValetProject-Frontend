@@ -20,7 +20,7 @@ function App() {
             <Route path="dining" element={<DestinationGuide />} />  
             <Route path="login" element={<Login />} />
             <Route path="savedLists" element={<SavedLists />} />  
-            <Route path="savedListDetails/:id" element={<SavedListDetails />} />  
+            <Route path="savedListDetails/:listId" element={<SavedListDetails />} />  
             <Route path="expenses" element={<ExpenseTracker />} />
             <Route path="*" element={<NotFound />} />
         </Routes> 
