@@ -14,7 +14,7 @@
 
 .restaurant {
     display: flex;
-    gap: 30px;
+    gap: 3rem; /* Space between each restaurant */
     align-items: flex-start; /* Align the image and text to the top */
     margin-bottom: 20px;
 }
@@ -31,7 +31,8 @@
     display: flex;
     font-size: 1.3rem;
     flex-direction: column;
-    justify-content: flex-start; /* Ensure text starts at the top */
+    text-align: center; 
+    justify-content: center; /* Ensure text starts at the top */
 }
 
 
