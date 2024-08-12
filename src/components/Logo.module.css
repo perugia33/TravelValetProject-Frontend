@@ -3,14 +3,25 @@
     background-image: url("destination.png");
     background-size: cover;
     background-position: center;
-    font-family: "Playwrite US Modern", cursive;
-    font-size: 1.5rem;
+    /* font-family: "Playwrite US Modern", cursive; */
+    /* font-size: 1.5rem; */
     color: rgb(40, 3, 67);
-    text-transform: uppercase;
+    /* text-transform: uppercase; */
     font-weight: 400;
-    word-spacing: 30px;
+    word-spacing: 5px;
     letter-spacing: -5px;
     padding: 4rem 2rem ;
+  }
+  .logo h1 {
+    font-size: 4rem;
+    font-family: "Monoton";
+    color: rgb(40, 3, 67);
+  }
+
+  .logo h2 {
+    font-size: 2.5rem;
+    font-family: "Playwrite US Modern", cursive;
+    color: rgb(40, 3, 67);
   }
 
   .savedListLogo {
@@ -32,4 +43,20 @@
   .cursive{
     font-family: "Playwrite US Modern", cursive;
     font-size: 1.5  rem;
+  }
+
+  .expenseLogo {
+    text-align: center;
+    background-image: url("expenseLogo.png");
+    background-size: cover;
+    background-position: right;
+    font-family: "Monoton";
+    font-size: 2rem;
+    color: rgb(40, 3, 67);
+ 
+    font-weight: 400;
+    word-spacing: 10px;
+    letter-spacing: -5px;
+    padding: 3rem 2rem ;
+   
   }

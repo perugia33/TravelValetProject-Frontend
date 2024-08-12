@@ -11,6 +11,7 @@ import WeatherData from "./WeatherData";
 //   { day: "Sat", minTemp: 60, maxTemp: 80, condition: "Sunny ☀️" },
 // ];
 
+
 function Weather({ weatherData}) {
   return (
     <div className={styles.container}>
@@ -23,5 +24,7 @@ function Weather({ weatherData}) {
     </div>
   );
 }
+
+
 
 export default Weather;
