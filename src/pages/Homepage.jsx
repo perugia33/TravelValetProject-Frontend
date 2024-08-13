@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-unused-vars
 import NavBar from "../components/NavBar"
 import { Link } from "react-router-dom";    
 import styles from "./Homepage.module.css";
