@@ -1,24 +1,16 @@
 import {useContext, useState} from 'react';
 import PropTypes from 'prop-types';
 import styles from '../pages/expenseTracker.module.css';
-// import axios from 'axios';
 import {AuthContext} from '../contexts/AuthContext.jsx';
 
 
 const ExpenseForm = ({onAddExpense}) => {
-  // const {auth} = useContext(AuthContext);
   const {expensesApi} = useContext(AuthContext);
   const [description, setDescription]=useState('');
   const [amount, setAmount]=useState('');
   const [date, setDate]=useState('');
   const [category, setCategory]=useState('');
   
-  // const client = axios.create({
-  //   baseURL: 'http://127.0.0.1:5000/expenses', 
-  //   headers: {
-  //     'Authorization': `Bearer ${auth}`,
-  //   },
-  // });
 
   const handleSubmit = async (e) => {
     console.log('Auth state:', expensesApi)

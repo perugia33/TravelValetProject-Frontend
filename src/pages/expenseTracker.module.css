@@ -140,7 +140,7 @@ button:hover {
   position: absolute;
   top: 0;
   right: 0;
-  margin: 60px; /* Optional: Adjust the spacing from the top and right edges */
+  margin: 60px; 
 }
 
 .top-right p {
