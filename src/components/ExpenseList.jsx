@@ -1,5 +1,6 @@
 
 import PropTypes from 'prop-types';
+import styles from '../pages/expenseTracker.module.css';
 
 
 const ExpenseList = ({ expenses, onDeleteExpense, onEditExpense }) => {
@@ -23,10 +24,10 @@ const ExpenseList = ({ expenses, onDeleteExpense, onEditExpense }) => {
               <td>{expense.date}</td>
               <td>{expense.description}</td>
               <td>{expense.category}</td>
-              <td>${expense.amount.toFixed(2)} </td>
+              <td className={styles["amount-cell"]}>${expense.amount.toFixed(2)} </td>
               <td>
                 <button onClick={() => onDeleteExpense(expense.id)}>Delete</button>
-                <button onClick={() => onEditExpense(expense)}>Edit</button>
+                <button className={styles["left"]} onClick={() => onEditExpense(expense)}>Edit</button>
               </td>
             </tr>
           ))}
