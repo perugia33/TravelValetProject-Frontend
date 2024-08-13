@@ -1,4 +1,5 @@
 import PropTypes from 'prop-types'; 
+import { useMemo } from 'react';
 
 import { Pie } from 'react-chartjs-2';
 import { Chart as ChartJS, Title, Tooltip, Legend, ArcElement } from 'chart.js';
@@ -9,21 +10,38 @@ const ExpenseSummary = ({ expenses }) => {
   // Calculate total amount and category breakdown
   const totalAmount = expenses.reduce((sum, expense) => sum + expense.amount, 0);
 
-  const categoryTotals = expenses.reduce((totals, expense) => {
-    totals[expense.category] = (totals[expense.category] || 0) + expense.amount;
-    return totals;
-  }, {});
+  // const categoryTotals = expenses.reduce((totals, expense) => {
+  //   totals[expense.category] = (totals[expense.category] || 0) + expense.amount;
+  //   return totals;
+  // }, {});
+  const chartData = useMemo(() => {
+    const categoryTotals = expenses.reduce((totals, expense) => {
+      totals[expense.category] = (totals[expense.category] || 0) + expense.amount;
+      return totals;
+    }, {});
 
-  const chartData = {
-    labels: Object.keys(categoryTotals),
-    datasets: [
-      {
-        data: Object.values(categoryTotals),
-        backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0', '#9966FF'],
-        hoverOffset: 4,
-      },
-    ],
-  };
+    return {
+      labels: Object.keys(categoryTotals),
+      datasets: [
+        {
+          data: Object.values(categoryTotals),
+          backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0', '#9966FF'],
+          hoverOffset: 4,
+        },
+      ],
+    };
+  }, [expenses]);
+
+  // const chartData = {
+  //   labels: Object.keys(categoryTotals),
+  //   datasets: [
+  //     {
+  //       data: Object.values(categoryTotals),
+  //       backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0', '#9966FF'],
+  //       hoverOffset: 4,
+  //     },
+  //   ],
+  // };
 
   return (
     <div >

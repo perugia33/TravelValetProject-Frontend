@@ -1,5 +1,7 @@
-import { createContext, useState, useContext } from 'react';
+import { createContext, useState, useContext,useEffect} from 'react';
 import PropTypes from 'prop-types'; 
+import expensesApi from "../services/expensesApi";
+import { updateAuthHeaders } from '../utils/authUtils';
 
 // Create the context
 const AuthContext = createContext();
@@ -9,6 +11,17 @@ export function AuthProvider ({ children }) {
   const [auth, setAuth] = useState(()=>localStorage.getItem('jwt')|| null);
   const [user, setUser]= useState(()=>localStorage.getItem('user')|| null);
   
+  useEffect(() => {
+    updateAuthHeaders(auth, expensesApi);
+  }, [auth]);
+  // useEffect(() => {
+  //   if (auth) {
+  //     expensesApi.defaults.headers.common['Authorization'] = `Bearer ${auth}`;
+  //   } else {
+  //     delete expensesApi.defaults.headers.common['Authorization'];
+  //   }
+  // }, [auth]);
+
   const login = (token, user) => {
     setAuth(token);
     localStorage.setItem('jwt', token);
@@ -26,7 +39,7 @@ export function AuthProvider ({ children }) {
   };
 
   return (
-    <AuthContext.Provider value={{ auth, user,login, logout }}>
+    <AuthContext.Provider value={{ auth, user,login, logout, expensesApi}}>
       {children}
     </AuthContext.Provider>
   );

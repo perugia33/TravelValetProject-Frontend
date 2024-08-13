@@ -1,52 +1,69 @@
 import NavBar from "../components/NavBar";
 import ExpenseLogo from "../components/ExpenseLogo"
-import {useState, useEffect, useContext} from "react";
+import {useState, useEffect, useContext, useCallback} from "react";
 import ExpenseForm from "../components/ExpenseForm";
 import ExpenseList from "../components/ExpenseList";
 import ExpensesSummary from "../components/ExpensesSummary";
-import axios from "axios";
+// import axios from "axios";
 import { AuthContext } from "../contexts/AuthContext.jsx";
+// import useExpensesApi from "../services/expensesApi";
 import { useNavigate } from "react-router-dom";
 import styles from './expenseTracker.module.css';
 
 
 
 function ExpenseTracker() {
-  const {auth, user, logout} = useContext(AuthContext);
+  const {auth, user, logout, expensesApi} = useContext(AuthContext);
   const [expenses, setExpenses] = useState([]);
   const [editingExpense, setEditingExpense] = useState(null);
   const [updateExpenseData, setUpdateExpenseData] = useState({});
+  // const expenseClient = useExpensesApi();
   // const [user, setUsername] = useState('');
   const navigate=useNavigate();
   
-  const client = axios.create({
-    baseURL: 'http://127.0.0.1:5000/expenses', 
-    headers: {
-      'Authorization': `Bearer ${auth}`,
-    },
-  });
+  // const client = axios.create({
+  //   baseURL: 'http://127.0.0.1:5000/expenses', 
+  //   headers: {
+  //     'Authorization': `Bearer ${auth}`,
+  //   },
+  // });
   // const fetchUsername = async() => {
     
   //   const response = await axios.get('http://127.0.0.1:5000/login',{username, password});
   //   setUsername(response.data.user);
   // }
-
-
-  const fetchExpenses = async() => {
+  const fetchExpenses = useCallback(async()=>{
     try{
-      const response = await client.get();
+      const response = await expensesApi.get('');
       setExpenses(response.data);
     }
     catch(error){
       console.error('Error fetching expenses', error);
     }
-  };
-  
-  useEffect(() => {
-    if (auth) {
-      fetchExpenses()
+  },[expensesApi]);
+  useEffect(()=>{
+    if(auth){
+      fetchExpenses();
     }
-  }, []);
+  },[auth,fetchExpenses]);
+
+  //**Asi es como funcionaba */
+
+  // const fetchExpenses = async() => {
+  //   try{
+  //     const response = await client.get();
+  //     setExpenses(response.data);
+  //   }
+  //   catch(error){
+  //     console.error('Error fetching expenses', error);
+  //   }
+  // };
+  
+  // useEffect(() => {
+  //   if (auth) {
+  //     fetchExpenses()
+  //   }
+  // }, []);
 
   const onAddExpense = (newExpense) => {
     setExpenses((prevExpenses) => [...prevExpenses, newExpense]);
@@ -54,7 +71,7 @@ function ExpenseTracker() {
 
   const onDeleteExpense = async(id) => {
     try {
-      await client.delete(`/${id}`);
+      await expensesApi.delete(`/${id}`);
       setExpenses(expenses.filter(expense => expense.id !== id));
     } catch (error) {
       console.error('Error deleting expense:', error);
@@ -72,7 +89,7 @@ function ExpenseTracker() {
   };
   const onUpdateExpense = async (id) => {
     try {
-      await client.put(`/${id}`, updateExpenseData);
+      await expensesApi.put(`/${id}`, updateExpenseData);
       setExpenses((prevExpenses)=>
         prevExpenses.map(expense => expense.id === id ? {...expense, ...updateExpenseData} : expense)
       );
@@ -166,8 +183,11 @@ function ExpenseTracker() {
                 onChange={handleChange}
               />
             </div>
-            <button type="submit">Update</button>
-            <button type='button' onClick={() => setEditingExpense(null)}>Cancel</button>
+            <div>
+              <br />
+              <button className={styles["edit-button"]} type="submit">Update</button>
+              <button className={styles["left"]} type='button' onClick={() => setEditingExpense(null)}>Cancel</button>
+            </div>
           </form>
         </div>
       )}
