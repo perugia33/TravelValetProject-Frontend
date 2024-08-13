@@ -14,13 +14,7 @@ export function AuthProvider ({ children }) {
   useEffect(() => {
     updateAuthHeaders(auth, expensesApi);
   }, [auth]);
-  // useEffect(() => {
-  //   if (auth) {
-  //     expensesApi.defaults.headers.common['Authorization'] = `Bearer ${auth}`;
-  //   } else {
-  //     delete expensesApi.defaults.headers.common['Authorization'];
-  //   }
-  // }, [auth]);
+  
 
   const login = (token, user) => {
     setAuth(token);
@@ -34,7 +28,6 @@ export function AuthProvider ({ children }) {
     localStorage.removeItem('jwt');
     setUser(null);
     localStorage.removeItem('username');
-    // window.location.href = 'http://localhost:5173';
     
   };
 
