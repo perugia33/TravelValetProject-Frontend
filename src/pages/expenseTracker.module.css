@@ -37,6 +37,9 @@ th {
 tr:nth-child(even) {
   background-color: #f9f9f9;
 }
+.amount-cell {
+  text-align: right;
+}
 
 .actions {
   display: flex;
@@ -52,6 +55,9 @@ tr:nth-child(even) {
   border-radius: 4px;
   padding: 5px 10px;
   cursor: pointer;
+}
+.left{
+  margin-left: 15px;
 }
 
 .actions button:hover {
@@ -70,6 +76,9 @@ tr:nth-child(even) {
 
 h2 {
   margin-bottom: 20px;
+}
+p{
+  font-size: 24px;
 }
 
 form.form-inline {
@@ -102,6 +111,7 @@ select{
   padding: 10px;
   border: 1px solid #ddd;
   border-radius: 4px;
+  font-size: 24px;
 }
 
 button {
@@ -111,8 +121,16 @@ button {
   border-radius: 4px;
   padding: 10px;
   cursor: pointer;
-  font-size: 16px;
-  margin-top: 10px; 
+  font-size: 24px;
+  /* margin-top: 10px;  */
+}
+
+.button-expense{
+  margin-top: 10px;
+  padding: 20px;
+}
+.edit-button{
+  margin-top: 20px;
 }
 
 button:hover {
@@ -122,7 +140,7 @@ button:hover {
   position: absolute;
   top: 0;
   right: 0;
-  margin: 60px; /* Optional: Adjust the spacing from the top and right edges */
+  margin: 60px; 
 }
 
 .top-right p {

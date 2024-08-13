@@ -1,30 +1,23 @@
 import {useContext, useState} from 'react';
 import PropTypes from 'prop-types';
 import styles from '../pages/expenseTracker.module.css';
-import axios from 'axios';
 import {AuthContext} from '../contexts/AuthContext.jsx';
 
 
 const ExpenseForm = ({onAddExpense}) => {
-  const {auth} = useContext(AuthContext);
+  const {expensesApi} = useContext(AuthContext);
   const [description, setDescription]=useState('');
   const [amount, setAmount]=useState('');
   const [date, setDate]=useState('');
   const [category, setCategory]=useState('');
   
-  const client = axios.create({
-    baseURL: 'http://127.0.0.1:5000/expenses', 
-    headers: {
-      'Authorization': `Bearer ${auth}`,
-    },
-  });
 
   const handleSubmit = async (e) => {
-    console.log('Auth state:', auth)
+    console.log('Auth state:', expensesApi)
     e.preventDefault();
     if (amount && description && date && category) {
       try {
-        const response = await client.post('', {
+        const response = await expensesApi.post('', {
           amount,
           description,
           date,
@@ -74,7 +67,10 @@ const ExpenseForm = ({onAddExpense}) => {
           <label htmlFor="amount">Amount</label>
           <input type="number" id='amount' value={amount} onChange={(e)=> setAmount(e.target.value)} required/>
         </div>
-        <button type="submit">Add Expense</button>
+        <div>
+          <br/>
+          <button className={styles["button-expense"]} type="submit">Add Expense</button>
+        </div>
       </form>
 
     </div>
