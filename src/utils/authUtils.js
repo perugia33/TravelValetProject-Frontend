@@ -1,7 +1,7 @@
-export const updateAuthHeaders = (auth, expensesApi) => {
+export const updateAuthHeaders = (auth, clientApi) => {
   if (auth) {
-    expensesApi.defaults.headers.common['Authorization'] = `Bearer ${auth}`;
+    clientApi.defaults.headers.common['Authorization'] = `Bearer ${auth}`;
   } else {
-    delete expensesApi.defaults.headers.common['Authorization'];
+    delete clientApi.defaults.headers.common['Authorization'];
   }
 };

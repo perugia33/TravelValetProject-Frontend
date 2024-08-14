@@ -5,7 +5,7 @@ import {AuthContext} from '../contexts/AuthContext.jsx';
 
 
 const ExpenseForm = ({onAddExpense}) => {
-  const {expensesApi} = useContext(AuthContext);
+  const {clientApi} = useContext(AuthContext);
   const [description, setDescription]=useState('');
   const [amount, setAmount]=useState('');
   const [date, setDate]=useState('');
@@ -13,11 +13,11 @@ const ExpenseForm = ({onAddExpense}) => {
   
 
   const handleSubmit = async (e) => {
-    console.log('Auth state:', expensesApi)
+    console.log('Auth state:', clientApi)
     e.preventDefault();
     if (amount && description && date && category) {
       try {
-        const response = await expensesApi.post('', {
+        const response = await clientApi.post('expenses', {
           amount,
           description,
           date,
