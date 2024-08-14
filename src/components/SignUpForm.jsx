@@ -1,13 +1,3 @@
-// function SignUpForm() {
-//     return (
-//         <div>
-//             <h1>Create an account</h1>
-//         </div>
-//     )
-// }
-
-// export default SignUpForm
-// import React from 'react';
 /* eslint-disable react/prop-types */
 import {useState} from 'react';
 import axios from 'axios';
@@ -24,7 +14,7 @@ function SignUpForm({onToggle}) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post('http://127.0.0.1:5000/user/register', {
+      await axios.post(`${import.meta.env.VITE_API_BASE_URL}/user/register`, {
         username,
         email,
         password
@@ -39,6 +29,7 @@ function SignUpForm({onToggle}) {
       setSuccess('');
     }
   };
+  
   return (
     <div className={styles.signUpContainer}>
       <div className={styles.formContainer}>
