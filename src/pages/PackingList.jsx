@@ -5,7 +5,6 @@ import PackingListForm from "../components/PackingListForm";
 import PackLogo from "../components/PackLogo";
 import styles from "./PackingList.module.css";
 import { useState, useRef, useContext } from "react";
-// import useApi from "../services/api";
 import {AuthContext} from "../contexts/AuthContext.jsx"
 
 function PackingList() {

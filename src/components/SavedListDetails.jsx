@@ -5,7 +5,6 @@ import PackingListForm from "./PackingListForm";
 import ProgressTracker from "./ProgressTracker";
 import PackLogo from "../components/PackLogo";
 import NavBar from "../components/NavBar";
-// import useApi from "../services/api";
 import { AuthContext } from "../contexts/AuthContext.jsx";
 
 function SavedListDetails() {
