@@ -1,20 +1,22 @@
 import SavedListsLogo from "../components/SavedListsLogo";
 import NavBar from "../components/NavBar";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "./SavedLists.module.css";
-import useApi from "../services/api";
+import { AuthContext } from "../contexts/AuthContext.jsx";
+// import useApi from "../services/api";
 
 function SavedLists() {
   const [savedLists, setSavedLists] = useState([]);
-  const api = useApi(); //Get centralized API instance
+  // const api = useApi(); //Get centralized API instance
   const navigate = useNavigate();
+  const clientApi = useContext(AuthContext);
 
   // Get list of saved lists:
   useEffect(() => {
     const fetchSavedLists = async () => {
       try {
-        const response = await api.get("");
+        const response = await clientApi.get("packing-list");
         setSavedLists(response.data);
       } catch (error) {
         console.error("Error fetching saved packing lists:", error);
@@ -22,7 +24,7 @@ function SavedLists() {
     };
 
     fetchSavedLists();
-  }, [api]);
+  }, [clientApi]);
 
   // Navigate to the details page using the listId:
   const handleEdit = (listId) => {
@@ -32,7 +34,7 @@ function SavedLists() {
   // Delete a list
   const handleDelete = async (listId) => {
     try {
-      await api.delete(`/${listId}`);
+      await clientApi.delete(`packing-list/${listId}`);
       //Update state to remove deleted list
       setSavedLists(savedLists.filter((list) => list.id !== listId));
     } catch (error) {

@@ -4,14 +4,16 @@ import ProgressTracker from "../components/ProgressTracker";
 import PackingListForm from "../components/PackingListForm";
 import PackLogo from "../components/PackLogo";
 import styles from "./PackingList.module.css";
-import { useState, useRef } from "react";
-import useApi from "../services/api";
+import { useState, useRef, useContext } from "react";
+// import useApi from "../services/api";
+import {AuthContext} from "../contexts/AuthContext.jsx"
 
 function PackingList() {
   const [items, setItems] = useState([]);
   const [listId] = useState(Date.now()); // Generate listId only once
   const listNameRef = useRef("");
-  const api = useApi(); //Use centralized Axios hook
+  // const api = useApi(); //Use centralized Axios hook
+  const { clientApi } = useContext(AuthContext);
 
   function handleAddItems(Item) {
     setItems((Items) => [...Items, Item]);
@@ -43,7 +45,7 @@ function PackingList() {
       const dateSaved = new Date().toISOString(); // Generate timestamp for the current date and time
       try {
         //Use the configured Axios instance in api.jsx
-        const response = await api.post("", {
+        const response = await clientApi.post("packing-list", {
           listId,
           listName,
           dateSaved,
