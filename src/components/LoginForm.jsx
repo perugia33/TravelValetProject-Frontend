@@ -20,6 +20,7 @@ function LoginForm({ onToggle }) {
       );
       console.log("API response data:", response.data);
       const { access_token, user } = response.data;
+      
       if (access_token) {
         login(access_token, user); // Call login function from AuthContext
       } else {
@@ -31,7 +32,7 @@ function LoginForm({ onToggle }) {
     }
   };
 
-  
+
   return (
     <div className={styles.loginContainer}>
       <div className={styles.formContainer}>
