@@ -15,6 +15,7 @@ function LoginForm({onToggle}) {
   const handleSubmit =  async (e) => {
     e.preventDefault();
     try {
+      console.log('que hay en auth', clientApi)
       const response = await clientApi.post('user/login',{username, password});
       const {access_token} = response.data
       const{user}=response.data
