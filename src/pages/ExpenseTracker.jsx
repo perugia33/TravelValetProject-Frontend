@@ -20,7 +20,7 @@ function ExpenseTracker() {
   // const expenseClient = useExpensesApi();
   // const [user, setUsername] = useState('');
   const navigate=useNavigate();
-  
+  console.log("Token", auth?.token);
   // const client = axios.create({
   //   baseURL: 'http://127.0.0.1:5000/expenses', 
   //   headers: {
@@ -34,6 +34,7 @@ function ExpenseTracker() {
   // }
   const fetchExpenses = useCallback(async()=>{
     try{
+      console.log('Authorization Header:', clientApi.defaults.headers['Authorization']);
       const response = await clientApi.get('expenses');
       setExpenses(response.data);
     }
