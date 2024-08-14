@@ -1,20 +1,21 @@
 /* eslint-disable react/prop-types */
 
-import {  useContext, useState, } from 'react';
-import { AuthContext, useAuth} from '../contexts/AuthContext.jsx'; 
+import {  useState, } from 'react';
+import {  useAuth,} from '../contexts/AuthContext.jsx'; 
 import styles from './LoginForm.module.css' 
 
 function LoginForm({onToggle}) {
   
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const {login} = useAuth();
+  const {login, clientApi} = useAuth();
   const [error, setError] = useState('');
-  const clientApi = useContext(AuthContext)
+  // const clientApi = useContext(AuthContext)
 
   const handleSubmit =  async (e) => {
     e.preventDefault();
     try {
+      console.log('que hay en auth', clientApi)
       const response = await clientApi.post('user/login',{username, password});
       const {access_token} = response.data
       const{user}=response.data
