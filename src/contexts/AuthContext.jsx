@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import clientApi from "../services/clientApi";
 import { updateAuthHeaders } from '../utils/authUtils';
 
-
 // Create the context
 const AuthContext = createContext();
 
@@ -12,11 +11,10 @@ export function AuthProvider ({ children }) {
   const [auth, setAuth] = useState(()=>localStorage.getItem('jwt')|| null);
   const [user, setUser]= useState(()=>localStorage.getItem('user')|| null);
 
-  
   useEffect(() => {
     console.log("auth", auth)
     updateAuthHeaders(auth, clientApi);
-    console.log('url', Object.keys(clientApi))
+    console.log('clientApi keys', Object.keys(clientApi.defaults.headers.common));
   }, [auth]);
   
 
@@ -24,9 +22,6 @@ export function AuthProvider ({ children }) {
     setAuth(token);
     localStorage.setItem('jwt', token);
     localStorage.setItem('user', user);
-    // window.location.href = 'http://localhost:5173'; 
-    // window.location.href = 'https://travel-valet.onrender.com';
-    // window.location.replace(import.meta.env.VITE_API_HOME_URL || 'http://localhost:5173');
     window.location.href = import.meta.env.VITE_API_HOME_URL || 'http://localhost:5173';
   };
 
