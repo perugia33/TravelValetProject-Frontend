@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-
+import axios from 'axios';
 import {  useState, } from 'react';
 import {  useAuth,} from '../contexts/AuthContext.jsx'; 
 import styles from './LoginForm.module.css' 
@@ -8,15 +8,16 @@ function LoginForm({onToggle}) {
   
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const {login, clientApi} = useAuth();
+  const {login} = useAuth();
   const [error, setError] = useState('');
   // const clientApi = useContext(AuthContext)
 
   const handleSubmit =  async (e) => {
     e.preventDefault();
     try {
-      console.log('que hay en auth', clientApi)
-      const response = await clientApi.post('user/login',{username, password});
+      console.log('que hay en auth', access_token)
+      const response = await axios.post('https://back-end-travel-valet.onrender.com/user/login',{username, password});
+      // const response = await clientApi.post('user/login',{username, password});
       const {access_token} = response.data
       const{user}=response.data
       if (access_token) {
