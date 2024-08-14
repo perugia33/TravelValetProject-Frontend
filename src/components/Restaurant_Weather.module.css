@@ -5,8 +5,8 @@
     /* background-color: lightgray; */
     flex-direction: column;
     align-items: center;
-    color: indigo;
+    color: rgb(93, 92, 92);
     flex-direction: column;
-    gap: 10rem   ;
+    gap: 5rem   ;
     height: max-content;
 }
