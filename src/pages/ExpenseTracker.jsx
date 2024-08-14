@@ -13,7 +13,7 @@ import styles from './expenseTracker.module.css';
 
 
 function ExpenseTracker() {
-  const {auth, user, logout, expensesApi} = useContext(AuthContext);
+  const {auth, user, logout, clientApi} = useContext(AuthContext);
   const [expenses, setExpenses] = useState([]);
   const [editingExpense, setEditingExpense] = useState(null);
   const [updateExpenseData, setUpdateExpenseData] = useState({});
@@ -34,13 +34,13 @@ function ExpenseTracker() {
   // }
   const fetchExpenses = useCallback(async()=>{
     try{
-      const response = await expensesApi.get('');
+      const response = await clientApi.get('expenses');
       setExpenses(response.data);
     }
     catch(error){
       console.error('Error fetching expenses', error);
     }
-  },[expensesApi]);
+  },[clientApi]);
   useEffect(()=>{
     if(auth){
       fetchExpenses();
@@ -71,7 +71,7 @@ function ExpenseTracker() {
 
   const onDeleteExpense = async(id) => {
     try {
-      await expensesApi.delete(`/${id}`);
+      await clientApi.delete(`expenses/${id}`);
       setExpenses(expenses.filter(expense => expense.id !== id));
     } catch (error) {
       console.error('Error deleting expense:', error);
@@ -89,7 +89,7 @@ function ExpenseTracker() {
   };
   const onUpdateExpense = async (id) => {
     try {
-      await expensesApi.put(`/${id}`, updateExpenseData);
+      await clientApi.put(`expenses/${id}`, updateExpenseData);
       setExpenses((prevExpenses)=>
         prevExpenses.map(expense => expense.id === id ? {...expense, ...updateExpenseData} : expense)
       );

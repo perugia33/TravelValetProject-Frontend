@@ -1,6 +1,6 @@
 import { createContext, useState, useContext,useEffect} from 'react';
 import PropTypes from 'prop-types'; 
-import expensesApi from "../services/expensesApi";
+import clientApi from "../services/expensesApi";
 import { updateAuthHeaders } from '../utils/authUtils';
 
 // Create the context
@@ -12,7 +12,7 @@ export function AuthProvider ({ children }) {
   const [user, setUser]= useState(()=>localStorage.getItem('user')|| null);
   
   useEffect(() => {
-    updateAuthHeaders(auth, expensesApi);
+    updateAuthHeaders(auth, clientApi);
   }, [auth]);
   
 
@@ -32,7 +32,7 @@ export function AuthProvider ({ children }) {
   };
 
   return (
-    <AuthContext.Provider value={{ auth, user,login, logout, expensesApi}}>
+    <AuthContext.Provider value={{ auth, user,login, logout, clientApi}}>
       {children}
     </AuthContext.Provider>
   );
