@@ -29,7 +29,7 @@ function DestinationGuide() {
         try {
 
             // Request restaurant recommendations
-            const restaurantResponse = await clientApi.get('/recommendations', {
+            const restaurantResponse = await clientApi.get('recommendations', {
                 params: {
                     city: formData.city,
                     state: formData.state,
