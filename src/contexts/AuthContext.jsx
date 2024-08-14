@@ -14,7 +14,9 @@ export function AuthProvider ({ children }) {
 
   
   useEffect(() => {
+    console.log("auth", auth)
     updateAuthHeaders(auth, clientApi);
+    console.log('url', Object.keys(clientApi))
   }, [auth]);
   
 
@@ -22,8 +24,8 @@ export function AuthProvider ({ children }) {
     setAuth(token);
     localStorage.setItem('jwt', token);
     localStorage.setItem('user', user);
-    window.location.href = 'http://localhost:5173'; 
-    // window.location.href = 'https://travel-valet.onrender.com';
+    // window.location.href = 'http://localhost:5173'; 
+    window.location.href = 'https://travel-valet.onrender.com';
     // window.location.replace(import.meta.env.VITE_API_HOME_URL || 'http://localhost:5173');
     // window.location.href = import.meta.env.VITE_API_HOME_URL || 'http://localhost:5173';
   };
