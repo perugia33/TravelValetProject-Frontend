@@ -1,8 +1,8 @@
 /* eslint-disable react/prop-types */
 
-import {  useState, } from 'react';
+import {  useContext, useState, } from 'react';
 import axios from 'axios';
-import { useAuth} from '../contexts/AuthContext.jsx'; 
+import { AuthContext, useAuth} from '../contexts/AuthContext.jsx'; 
 import styles from './LoginForm.module.css' 
 
 function LoginForm({onToggle}) {
@@ -10,12 +10,13 @@ function LoginForm({onToggle}) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const {login} = useAuth();
-  const [error, setError] = useState(''); 
+  const [error, setError] = useState('');
+  const clientApi = useContext(AuthContext)
 
   const handleSubmit =  async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://127.0.0.1:5000/user/login',{username, password});
+      const response = await clientApi.post('user/login',{username, password});
       const {access_token} = response.data
       const{user}=response.data
       if (access_token) {

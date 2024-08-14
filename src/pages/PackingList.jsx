@@ -13,7 +13,7 @@ function PackingList() {
   const [listId] = useState(Date.now()); // Generate listId only once
   const listNameRef = useRef("");
   // const api = useApi(); //Use centralized Axios hook
-  const { clientApi } = useContext(AuthContext);
+  const clientApi = useContext(AuthContext);
 
   function handleAddItems(Item) {
     setItems((Items) => [...Items, Item]);
