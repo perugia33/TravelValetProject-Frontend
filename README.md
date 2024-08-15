@@ -15,6 +15,10 @@ Travel Valet is a single-page application designed to simplify travel planning. 
 - **Login/Sign-Up Page:**
   - Users can toggle between logging in or signing up.
   - Secure authentication for accessing saved lists and personalized data.
+- **Expense Tracker:**
+  - Users can add a travel-related expenses by category.
+  - Track total expenditures.
+  - View a summary of expenses.
 
 ## **Tech Stack**
 ### **Frontend:**
@@ -38,5 +42,6 @@ Travel Valet is a single-page application designed to simplify travel planning. 
   - **Destination Guide:** Displays weather and restaurant data.
   - **Saved Lists:** Access previously saved packing lists.
   - **Login/Sign-Up Page:** User authentication with a toggle feature.
+  - **Expense Tracker Page:** Users can add, update and track travel expenses.
 
 
