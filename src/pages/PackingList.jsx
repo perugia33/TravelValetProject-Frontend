@@ -11,8 +11,7 @@ function PackingList() {
   const [items, setItems] = useState([]);
   const [listId] = useState(Date.now()); // Generate listId only once
   const listNameRef = useRef("");
-  // const api = useApi(); //Use centralized Axios hook
-  const clientApi = useContext(AuthContext);
+  const { clientApi } = useContext(AuthContext);  //Destructure clientApi from AuthContext (only get clientApi)
 
   function handleAddItems(Item) {
     setItems((Items) => [...Items, Item]);
@@ -43,7 +42,6 @@ function PackingList() {
       listNameRef.current = listName;
       const dateSaved = new Date().toISOString(); // Generate timestamp for the current date and time
       try {
-        //Use the configured Axios instance in api.jsx
         const response = await clientApi.post("packing-list", {
           listId,
           listName,
@@ -52,7 +50,7 @@ function PackingList() {
         });
         console.log("Response from save list", response.data);
       } catch (error) {
-        console.log("Error saving list", error);
+        console.error("Error saving list", error);
       }
     }
   }

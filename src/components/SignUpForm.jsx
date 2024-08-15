@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import {useState} from 'react';
-import axios from 'axios';
+import clientApi from '../services/clientApi';
 
 import styles from './SignUpForm.module.css';
 
@@ -14,7 +14,7 @@ function SignUpForm({onToggle}) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post(`${import.meta.env.VITE_API_BASE_URL}/user/register`, {
+      await clientApi.post(`user/register`, {
         username,
         email,
         password
@@ -61,7 +61,6 @@ function SignUpForm({onToggle}) {
                   className={styles.formInput}    
               />
             </div>
-            
             <div>
               <label htmlFor="password" className={styles.label}>Password</label>
               <input
@@ -78,7 +77,6 @@ function SignUpForm({onToggle}) {
             {success && <p className={styles.success}>{success}</p>}
             <button className={styles.formButton} >Submit</button>
           </form>
-        
           <br />
           <h2>
             Already have an account? <button type="button" onClick={onToggle} className={styles.toggleButton} >Login</button>
@@ -89,58 +87,4 @@ function SignUpForm({onToggle}) {
   
 }
 export default SignUpForm;
-
-
-// function SignUpForm({ onToggle }) {
-//   return (
-//     <div className={styles.signUpContainer}>
-//         <div className={styles.formContainer}>
-//             <h1>Travel Valet</h1>
-//             <h2>Registration Form</h2>
-//             <br />
-//             <form className={styles.formGroup} >
-//                 <div>
-//                 <label htmlFor="username" className={styles.label}>Username</label>
-//                 <input
-//                     type="text"
-//                     id="username"
-//                     name="username"
-//                     required
-//                     className={styles.formInput}    
-//                 />
-//                 </div>
-//                 <div>
-//                 <label htmlFor="email" className={styles.label}>Email Address</label>
-//                 <input
-//                     type="email"
-//                     id="email"
-//                 name="email"
-//                 required
-//                 className={styles.formInput}    
-//             />
-//              </div>
-             
-//         <div>
-//           <label htmlFor="password" className={styles.label}>Password</label>
-//           <input
-//             type="password"
-//             id="password"
-//             name="password"
-//             required
-//             className={styles.formInput}    
-//           />
-//         </div>
-//         </form>
-//         <button className={styles.formButton} >Submit</button> 
-//        <br />
-//         <h2>
-//          Already have an account? <button type="button" onClick={onToggle} className={styles.toggleButton} >Login</button>
-//         </h2>
-    
-//       </div>
-//     </div>  
-//   );
-// }
-
-// export default SignUpForm;
 

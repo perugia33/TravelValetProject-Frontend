@@ -1,7 +1,8 @@
 /* eslint-disable react/prop-types */
-import axios from "axios";
+// import axios from "axios";
 import { useState } from "react";
 import { useAuth } from "../contexts/AuthContext.jsx";
+import clientApi from "../services/clientApi.js";
 import styles from "./LoginForm.module.css";
 
 function LoginForm({ onToggle }) {
@@ -14,17 +15,17 @@ function LoginForm({ onToggle }) {
     e.preventDefault();
     console.log("Form submitted");
     try {
-      // Send login request to server
-      const response = await axios.post(`${import.meta.env.VITE_API_BASE_URL}/user/login`,
+      // Send login request to server using clientApi
+      const response = await clientApi.post('user/login',
         { username, password }
       );
       console.log("API response data:", response.data);
       const { access_token, user } = response.data;
       
       if (access_token) {
-        login(access_token, user); // Call login function from AuthContext
+        login(access_token, user); // Call login function from AuthContext with token and user data
       } else {
-        throw new Error("No access token received");
+        throw new Error('No access token received');
       }
     } catch (err) {
       console.error('Error loggin in:', err.response ? err.response.data : err.message);

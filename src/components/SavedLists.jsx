@@ -8,9 +8,8 @@ import { AuthContext } from "../contexts/AuthContext.jsx";
 
 function SavedLists() {
   const [savedLists, setSavedLists] = useState([]);
-  // const api = useApi(); //Get centralized API instance
   const navigate = useNavigate();
-  const clientApi = useContext(AuthContext);
+  const { clientApi } = useContext(AuthContext);
 
   // Get list of saved lists:
   useEffect(() => {

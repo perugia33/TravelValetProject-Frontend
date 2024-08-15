@@ -1,44 +1,52 @@
-import { createContext, useState, useContext,useEffect} from 'react';
+import { createContext, useState, useContext} from 'react';
 import PropTypes from 'prop-types'; 
 import clientApi from "../services/clientApi";
-import { updateAuthHeaders } from '../utils/authUtils';
+// import { updateAuthHeaders } from '../utils/authUtils';
 
-// Create the context
+
+// Create a context object to manage authentication state
 const AuthContext = createContext();
 
 // Create a provider component
 export function AuthProvider ({ children }) {
-  const [auth, setAuth] = useState(()=>localStorage.getItem('jwt')|| null);
-  const [user, setUser]= useState(()=>localStorage.getItem('user')|| null);
+  // Initialize state with JWT token and user data from local storage or set to null
+  const [auth, setAuth] = useState(()=> localStorage.getItem('jwt') || null);
+  const [user, setUser] = useState(()=> localStorage.getItem('user') || null);
 
-  useEffect(() => {
-    console.log("auth", auth)
-    updateAuthHeaders(auth, clientApi);
-    console.log('clientApi keys', Object.keys(clientApi.defaults.headers.common));
-  }, [auth]);
-  
 
+  // Function to handle User Login:
   const login = (token, user) => {
+    // Update the auth state with the new token
     setAuth(token);
+    // Update the user state with new user data
+    setUser(user);
+    // Store the token and user data in local storage
     localStorage.setItem('jwt', token);
     localStorage.setItem('user', user);
-    window.location.href = 'https://travel-valet.onrender.com';
+    // Redirect to the home page:
+    window.location.href = import.meta.env.VITE_API_HOME_URL || 'http://localhost:5173';
+    // window.location.href = 'https://travel-valet.onrender.com';
     // import.meta.env.VITE_API_HOME_URL || 'http://localhost:5173';
   };
-
+  
+  // Function to handle user logout:
   const logout = () => {
+    // Clear the auth state
     setAuth(null);
-    localStorage.removeItem('jwt');
     setUser(null);
+    // Remove token and user datea form local storage
+    localStorage.removeItem('jwt');
     localStorage.removeItem('user');
   };
-
+  
+  // Give auth state, login, logout functions and clientApi instance to the rest of the app.
   return (
     <AuthContext.Provider value={{ auth, user,login, logout, clientApi}}>
       {children}
     </AuthContext.Provider>
   );
 }
+
 AuthProvider.propTypes = {
   children: PropTypes.node.isRequired
 };

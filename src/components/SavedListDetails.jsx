@@ -11,8 +11,7 @@ function SavedListDetails() {
   const { listId } = useParams(); // Use URL params to get the listId
   const [list, setList] = useState(null);
   const [items, setItems] = useState([]);
-  const clientApi = useContext(AuthContext);
-  // const api = useApi();
+  const { clientApi } = useContext(AuthContext);
 
   // Get one list by id:
   useEffect(() => {
@@ -112,7 +111,7 @@ function SavedListDetails() {
   // Clear all items from a list:
   const handleClearAllItemsSaved = async () => {
     try {
-      // Call API to remove all items from the backed
+      // Call API to remove all items from the backend
       await clientApi.delete(`packing-list/${listId}/items`);
 
       // Clear items from local state
@@ -139,7 +138,7 @@ function SavedListDetails() {
       <ProgressTracker
         items={items}
         listId={listId} // ID of the list being updated
-        listNameRef={list.name}
+        listNameRef={list.listName}
         onClearAllItems={handleClearAllItemsSaved}
         onSaveUpdatedList={handleUpdateList} // Pass the funtion to update an existing list
       />
