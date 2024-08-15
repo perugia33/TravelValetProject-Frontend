@@ -25,8 +25,6 @@ export function AuthProvider ({ children }) {
     localStorage.setItem('user', user);
     // Redirect to the home page:
     window.location.href = import.meta.env.VITE_API_HOME_URL || 'http://localhost:5173';
-    // window.location.href = 'https://travel-valet.onrender.com';
-    // import.meta.env.VITE_API_HOME_URL || 'http://localhost:5173';
   };
   
   // Function to handle user logout:

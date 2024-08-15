@@ -13,8 +13,8 @@ const ExpenseForm = ({onAddExpense}) => {
   
 
   const handleSubmit = async (e) => {
-    console.log('Auth state:', clientApi)
     e.preventDefault();
+    // console.log('Auth state:', clientApi)
     if (amount && description && date && category) {
       try {
         const response = await clientApi.post('expenses', {
@@ -32,12 +32,12 @@ const ExpenseForm = ({onAddExpense}) => {
         } 
       } catch (error) {
         console.error('Error adding expense:', error.response ? error.response.data : error.message);
-        if (error.response && error.response.status === 401) {
-          console.error('Token may be expired or invalid.');
+        // if (error.response && error.response.status === 401) {
+        //   console.error('Token may be expired or invalid.');
         }
       }
-    }  
-  };
+    };  
+
  
   return (
     <div className={styles.ExpenseForm}>

@@ -3,53 +3,39 @@ import Restaurant_Weather from "../components/Restaurant_Weather";
 import Sidebar from "../components/Sidebar"
 import styles from "./DestinationGuide.module.css";
 import Logo from "../components/Logo";
-// import axios from "axios";  
-import { useState, useContext} from "react";
+import { useState, useContext } from "react";
 import { AuthContext } from "../contexts/AuthContext.jsx";
 
 
 function DestinationGuide() {
-    const {auth, clientApi } = useContext(AuthContext);
+    const { clientApi } = useContext(AuthContext);
     const [weatherData, setWeatherData] = useState([]);
     const [recommendations, setRecommendations] = useState([]); 
     const [loading, setLoading] = useState(false);  
     const [error, setError] = useState  (null);
-
-    // const client = axios.create({
-    //     baseURL: 'http://127.0.0.1:5000', 
-    //     headers: {
-    //       'Authorization': `Bearer ${auth}`,
-    //     },
-    //   });
 
 
     async function handleSubmit(formData) {
         setLoading(true);
         setError(null);
         try {
-
             // Request restaurant recommendations
             const restaurantResponse = await clientApi.get('recommendations', {
                 params: {
                     city: formData.city,
                     state: formData.state,
                     country: formData.country
-                },
-                headers: {
-                    // Authorization: `Bearer ${localStorage.getItem('token')}`
-                    Authorization: `Bearer ${auth}`
                 }
             });
             setRecommendations(restaurantResponse.data.recommendations);
 
             // Request weather data
-            const weatherResponse = await clientApi.get('/weather',{
+            const weatherResponse = await clientApi.get('weather',{
                 params: {
                     city: formData.city,
                     state: formData.state,
                     country: formData.country
                 },
-                
             });
             // setWeatherData(weatherResponse.data.weather);
             const groupedData = weatherResponse.data.list.reduce((acc, item) => {
@@ -84,7 +70,11 @@ function DestinationGuide() {
 
         } catch (error) {
             setError('Failed to fetch data');
-            console.error('Error submitting form data:', error);
+            console.error('Error submitting form data:', {
+                message: error.message,
+                response: error.response ? error.response.data : null,
+                request: error.request ? error.request : null
+            });
         } finally {
             setLoading(false);
         }

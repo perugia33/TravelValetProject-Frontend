@@ -4,7 +4,8 @@ import styles from '../pages/expenseTracker.module.css';
 
 
 const ExpenseList = ({ expenses, onDeleteExpense, onEditExpense }) => {
-  console.log('id', expenses.map(expense =>(expense.id)))
+  // console.log('id', expenses.map(expense =>(expense.id)))
+  console.log('Expenses in List:', expenses);
   return (
     <div >
       <h2>Expenses</h2>
@@ -21,10 +22,13 @@ const ExpenseList = ({ expenses, onDeleteExpense, onEditExpense }) => {
         <tbody>
           {expenses.map(expense => (
             <tr key={expense.id}>
-              <td>{expense.date}</td>
+              {/* <td>{expense.date}</td> */}
+              <td>{new Date(expense.date).toLocaleDateString()}</td>
               <td>{expense.description}</td>
               <td>{expense.category}</td>
-              <td className={styles["amount-cell"]}>${expense.amount.toFixed(2)} </td>
+              {/* <td className={styles["amount-cell"]}>${expense.amount.toFixed(2)} </td> */}
+              <td className={styles["amount-cell"]}>${expense.amount.toFixed(2)}</td>
+
               <td>
                 <button onClick={() => onDeleteExpense(expense.id)}>Delete</button>
                 <button className={styles["left"]} onClick={() => onEditExpense(expense)}>Edit</button>

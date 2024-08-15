@@ -4,9 +4,7 @@ import {useState, useEffect, useContext, useCallback} from "react";
 import ExpenseForm from "../components/ExpenseForm";
 import ExpenseList from "../components/ExpenseList";
 import ExpensesSummary from "../components/ExpensesSummary";
-// import axios from "axios";
 import { AuthContext } from "../contexts/AuthContext.jsx";
-// import useExpensesApi from "../services/expensesApi";
 import { useNavigate } from "react-router-dom";
 import styles from './expenseTracker.module.css';
 
@@ -17,32 +15,20 @@ function ExpenseTracker() {
   const [expenses, setExpenses] = useState([]);
   const [editingExpense, setEditingExpense] = useState(null);
   const [updateExpenseData, setUpdateExpenseData] = useState({});
-  // const expenseClient = useExpensesApi();
-  // const [user, setUsername] = useState('');
   const navigate=useNavigate();
-  console.log("Token", auth?.token);
-  // const client = axios.create({
-  //   baseURL: 'http://127.0.0.1:5000/expenses', 
-  //   headers: {
-  //     'Authorization': `Bearer ${auth}`,
-  //   },
-  // });
-  // const fetchUsername = async() => {
-    
-  //   const response = await axios.get('http://127.0.0.1:5000/login',{username, password});
-  //   setUsername(response.data.user);
-  // }
+  // console.log("Token", auth?.token);
+
   const fetchExpenses = useCallback(async()=>{
     try{
-      console.log('Authorization Header:', clientApi.defaults.headers['Authorization']);
+      // console.log('Authorization Header:', clientApi.defaults.headers['Authorization']);
       const response = await clientApi.get('expenses');
       setExpenses(response.data);
-    }
-    catch(error){
+    } catch (error) {
       console.error('Error fetching expenses', error);
     }
   },[clientApi]);
-  useEffect(()=>{
+
+  useEffect(() => {
     if(auth){
       fetchExpenses();
     }
@@ -78,6 +64,7 @@ function ExpenseTracker() {
       console.error('Error deleting expense:', error);
     }
   };
+
   const onEditExpense = (expense) => {
     const formattedDate = new Date(expense.date).toISOString().split('T')[0]; 
     setEditingExpense(expense);
@@ -88,27 +75,61 @@ function ExpenseTracker() {
       amount: expense.amount,
     });
   };
-  const onUpdateExpense = async (id) => {
-    try {
-      await clientApi.put(`expenses/${id}`, updateExpenseData);
-      setExpenses((prevExpenses)=>
-        prevExpenses.map(expense => expense.id === id ? {...expense, ...updateExpenseData} : expense)
-      );
-      setEditingExpense(null);
-    } catch (error) {
-      console.error('Error updating expense:', error);
+
+  // const onUpdateExpense = async (id) => {
+  //   if (editingExpense) {
+  //     try {
+  //       const response = await clientApi.put(`expenses/${editingExpense.id}`, updateExpenseData);
+  //       console.log('Updated Expense Response:', response.data);
+  //       setExpenses((prevExpenses)=>
+  //         prevExpenses.map(expense => expense.id === editingExpense.id ? { ...expense, ...updateExpenseData } : expense)
+  //       );
+  //       setEditingExpense(null);
+  //     } catch (error) {
+  //       console.error('Error updating expense:', error);
+  //     }
+  //   }
+  // };
+  const onUpdateExpense = async () => {
+    if (editingExpense) {
+      try {
+        const response = await clientApi.put(`expenses/${editingExpense.id}`, updateExpenseData);
+        console.log('Updated Expense Response:', response.data);
+        // Update the state with the updated expense
+        setExpenses((prevExpenses) =>
+          prevExpenses.map(expense =>
+            expense.id === editingExpense.id ? { ...expense, ...updateExpenseData } : expense
+          )
+        );
+        setEditingExpense(null);
+      } catch (error) {
+        console.error('Error updating expense:', error);
+      }
     }
   };
+  
+  
+  // const handleChange = (e) => {
+  //   setUpdateExpenseData({
+  //     ...updateExpenseData,
+  //     [e.target.name]: e.target.value,
+  //   });
+  // };
+
   const handleChange = (e) => {
-    setUpdateExpenseData({
-      ...updateExpenseData,
-      [e.target.name]: e.target.value,
-    });
-  };
+    const { name, value, type } = e.target;
+    setUpdateExpenseData(prevState => ({
+      ...prevState,
+      [name]: type === 'number' ? parseFloat(value) : value,
+    }));
+  };  
+  
+
   const handleLogout = () => {
     logout();
     navigate('/login');
   };
+
   if (!auth) {
     return <div><h2>Please login to view and manage expenses.</h2>
       <br />
@@ -116,6 +137,7 @@ function ExpenseTracker() {
       
     </div>;
   }
+
   return (
     <div className={styles.ExpenseTracker}>
       <NavBar />
@@ -139,7 +161,13 @@ function ExpenseTracker() {
       {editingExpense && (
         <div className={styles.ExpenseForm} >
           <h3>Edit Expense</h3>
-          <form onSubmit={() => onUpdateExpense(editingExpense.id)} className={styles["form-inline"]}>
+          {/* <form onSubmit={() => onUpdateExpense(editingExpense.id)} className={styles["form-inline"]}> */}
+          <form onSubmit={(e) => {
+            e.preventDefault();
+            onUpdateExpense();
+          }} className={styles["form-inline"]}>
+
+         
             <div className={styles["form-group"]}>
               <label htmlFor="date">Date</label>
               <input

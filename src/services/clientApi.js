@@ -16,10 +16,12 @@ clientApi.interceptors.request.use(
       // if token exists, add it to request Authorization header
       config.headers.Authorization = `Bearer ${token}`;
     }
+    console.log('Request Config:', config);
     // Return the modified config object:
     return config;
   },
   (error) => {
+    console.error('Request Error:', error);
     // If there is an error in request config, reject the promise with the error
     return Promise.reject(error);
   }
@@ -28,11 +30,21 @@ clientApi.interceptors.request.use(
 // Response interceptor to handle errors globally
 clientApi.interceptors.response.use(
   (response) => {
-    // if response is successful return it
+    console.log('Response Data:', response.data); // Log response data
     return response;
   },
   (error) => {
-    console.error('API call error (IM refactored code):', error);
+    if (error.response) {
+      console.error('API error response', {
+        status: error.response.status,
+        headers: error.response.headers,
+        data: error.response.data
+      });
+    } else if (error.request) {
+      console.error('API call error: No response received', error.request);
+    } else {
+      console.error('API call error (IM refactored code):', error.message);
+    }
     return Promise.reject(error);
   }
 );
