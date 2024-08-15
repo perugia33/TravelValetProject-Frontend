@@ -24,7 +24,7 @@ export function AuthProvider ({ children }) {
     localStorage.setItem('jwt', token);
     localStorage.setItem('user', user);
     // Redirect to the home page:
-    window.location.href = 'https://travel-valet.onrender.com/packinglist' || 'https://travel-valet.onrender.com/packinglist';
+    window.location.href = "https://travel-valet.onrender.com";
   };
   
   // Function to handle user logout:
